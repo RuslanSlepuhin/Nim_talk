@@ -18,10 +18,13 @@ def get_talk(quest:str, **kwargs):
   user = kwargs['user']
   if not full_dialog.get(user):
     full_dialog[user] = []
+  # if not kwargs.get('history'):
+  #   full_dialog[user] = []
   print("question:", quest)
   full_dialog[user].append({"role": "user", "content": quest})
   dialog = full_dialog[user].copy()
   dialog = dialog[-10:]
+  print(dialog)
   completion = client.chat.completions.create(
     model="nvidia/llama-3.1-nemotron-70b-instruct",
     # messages=[{"role":"user","content":quest}],
